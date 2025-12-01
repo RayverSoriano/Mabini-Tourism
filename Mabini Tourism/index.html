@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mabini Tourism</title>
+
   <style>
     /* Reset some default styles */
     * {
@@ -18,8 +19,10 @@
       color: #333;
       background-size: cover;
       line-height: 1.6;
+      padding-top: 150px; /* space for fixed header */
     }
 
+    /* ---------- FIXED HEADER ---------- */
     header {
       background: #6aaaff;
       color: white;
@@ -29,6 +32,11 @@
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
     }
 
     /* Logo styling */
@@ -81,6 +89,67 @@
       font-weight: bold;
     }
 
+    /* ---------- HAMBURGER MENU ---------- */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+
+    .hamburger div {
+      width: 30px;
+      height: 3px;
+      background: white;
+      border-radius: 3px;
+    }
+
+    /* ---------- SIDE SLIDE MENU ---------- */
+    #sideMenu {
+      position: fixed;
+      top: 0;
+      right: -250px;
+      width: 250px;
+      height: 100%;
+      background: #6aaaff;
+      padding-top: 100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      transition: right 0.3s ease;
+      z-index: 2000;
+    }
+
+    #sideMenu button {
+      width: 80%;
+      padding: 12px;
+      border: 2px solid white;
+      background: transparent;
+      color: white;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    #sideMenu button:hover {
+      background: white;
+      color: #6aaaff;
+    }
+
+    /* BACKDROP */
+    #menuBackdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      z-index: 1500;
+    }
+
+    /* ---------- MAIN CONTENT ---------- */
     .container {
       width: 90%;
       max-width: 1100px;
@@ -108,13 +177,11 @@
       text-align: center;
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       padding: 20px 30px;
       border-radius: 15px;
       border: 1px solid rgba(255, 255, 255, 0.3);
       max-width: 800px;
       margin: 0 auto;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       color: #000;
     }
 
@@ -130,7 +197,6 @@
       border-radius: 8px;
       cursor: pointer;
       box-shadow: 0 4px 10px rgba(0, 121, 107, 0.4);
-      transition: background-color 0.3s ease;
     }
 
     #exploreBtn:hover {
@@ -147,10 +213,8 @@
     .card {
       background: rgba(255, 255, 255, 0.15);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 12px;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
       overflow: hidden;
       transition: transform 0.3s ease;
     }
@@ -175,35 +239,10 @@
     }
 
     .card-content p {
-      font-size: 1rem;
-      color: #ffffff;
+      color: white;
     }
 
-    /* Contact section */
-    #contact {
-      width: 90%;
-      max-width: 400px;
-      margin: 0 auto 80px;
-      padding: 20px 30px;
-      background: rgba(255, 255, 255, 0.2);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      border-radius: 15px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      color: #000;
-      text-align: center;
-      font-size: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    #contact strong {
-      font-weight: bold;
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-    }
+    /* Contact section */ #contact { width: 90%; max-width: 400px; margin: 0 auto 80px; padding: 20px 30px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); color: #000; text-align: center; font-size: 1.2rem; display: flex; flex-direction: column; gap: 8px; } #contact strong { font-weight: bold; font-size: 1.4rem; margin-bottom: 10px; }
 
     /* Map container */
     #map {
@@ -212,101 +251,113 @@
       height: 400px;
       margin: 0 auto 50px;
       border-radius: 15px;
-      /* Removed border here */
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
       background: rgba(255, 255, 255, 0.15);
       overflow: hidden;
     }
 
     footer {
       background: #6aaaff;
-      color: rgb(255, 255, 255);
+      color: white;
       text-align: center;
       padding: 15px 0;
-      position: fixed;
       width: 100%;
       bottom: 0;
       font-size: 0.9rem;
     }
 
-    @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
-      }
-
-      #logo {
-        margin-bottom: 15px;
-      }
-
+    /* ---------- MOBILE ---------- */
+    @media (max-width: 700px) {
       nav {
-        margin-top: 15px;
-        justify-content: center;
-        width: 100%;
-        gap: 10px;
+        display: none;
       }
 
-      header h1 {
-        font-size: 2rem;
+      .header-text {
+        display: none;
       }
 
-      section h2 {
-        font-size: 1.5rem;
+      .hamburger {
+        display: flex;
+      }
+
+      body {
+        padding-top: 120px;
       }
     }
   </style>
 </head>
+
 <body>
+
+  <!-- HEADER -->
   <header>
     <img id="logo" src="mabini_logo_fbg-removebg-preview.png" alt="Mabini Tourism Logo" />
+
     <div class="header-text">
       <h1>Welcome to Mabini Tourism</h1>
       <p>Discover the Beauty and Adventure of Mabini</p>
     </div>
+
+    <!-- DESKTOP NAV -->
     <nav>
       <button onclick="scrollToSection('about')">Home</button>
       <button onclick="scrollToSection('map')">Map</button>
       <button onclick="scrollToSection('contact')">Contact</button>
     </nav>
+
+    <!-- HAMBURGER BUTTON -->
+    <div class="hamburger" onclick="openMenu()">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
   </header>
 
+  <!-- SIDE MENU -->
+  <div id="sideMenu">
+    <button onclick="navigate('about')">Home</button>
+    <button onclick="navigate('map')">Map</button>
+    <button onclick="navigate('contact')">Contact</button>
+  </div>
+
+  <!-- BACKDROP -->
+  <div id="menuBackdrop" onclick="closeMenu()"></div>
+
+  <!-- MAIN CONTENT -->
   <div class="container">
+
     <section id="about">
       <h2>About Mabini</h2>
       <p>
-        Mabini is a beautiful coastal town located in the province of Batangas, Philippines.
-        Known as the "Dive Capital of the Philippines," Mabini offers stunning dive sites, pristine beaches, and breathtaking views of the Taal Volcano.
-        Whether you're an adventure seeker or someone looking for a peaceful getaway, Mabini has something for everyone.
+        Mabini is a beautiful coastal town located in the province of Batangas, Philippines. Known as the "Dive Capital of the Philippines," Mabini offers stunning dive sites, pristine beaches, and breathtaking views of the Taal Volcano. Whether you're an adventure seeker or someone looking for a peaceful getaway, Mabini has something for everyone.
       </p>
       <button id="exploreBtn">Explore Now</button>
     </section>
 
     <section id="attractions">
       <h2>Top Attractions</h2>
+
       <div class="attractions">
         <div class="card">
-          <img src="anilao diving spot.jpg" alt="Anilao Dive Site" />
+          <img src="anilao diving spot.jpg" alt="">
           <div class="card-content">
             <h3>Anilao Dive Sites</h3>
-            <p>Explore vibrant coral reefs and diverse marine life in one of Asia's top diving destinations.</p>
+            <p>Explore vibrant coral reefs and diverse marine life.</p>
           </div>
         </div>
 
         <div class="card">
-          <img src="gulugod.jpg" alt="Gulugod" />
+          <img src="gulugod.jpg" alt="">
           <div class="card-content">
             <h3>Mt. Gulugod Baboy</h3>
-            <p>A scenic hiking spot, famous for its pig-backbone-shaped ridge and stunning views of Anilao and Taal Volcano.</p>
+            <p>A scenic ridge with breathtaking views.</p>
           </div>
         </div>
 
         <div class="card">
-          <img src="mabini beaches.avif" alt="Beaches" />
+          <img src="mabini beaches.avif" alt="">
           <div class="card-content">
             <h3>Mabini Beaches</h3>
-            <p>Relax on beautiful white sand beaches and enjoy the tranquil seaside atmosphere.</p>
+            <p>Relax on peaceful and beautiful shores.</p>
           </div>
         </div>
       </div>
@@ -316,51 +367,49 @@
       <h2>Local Food Favorites</h2>
       <div class="attractions">
         <div class="card">
-          <img src="adobo.jpg" alt="Adobo" />
+          <img src="adobo.jpg" alt="">
           <div class="card-content">
             <h3>Adobo</h3>
-            <p>A classic Filipino dish with savory marinated meat, perfect for any meal.</p>
+            <p>A classic Filipino marinated dish.</p>
           </div>
         </div>
 
         <div class="card">
-          <img src="lomi mabini.jpg" alt="Lomi" />
+          <img src="lomi mabini.jpg" alt="">
           <div class="card-content">
             <h3>Lomi</h3>
-            <p>A Filipino thick noodle soup with meat, veggies, and a savory broth.</p>
+            <p>A thick flavorful noodle soup.</p>
           </div>
         </div>
 
         <div class="card">
-          <img src="lechon.jpg" alt="Lechon" />
+          <img src="lechon.jpg" alt="">
           <div class="card-content">
             <h3>Lechon</h3>
-            <p>Whole roasted pig with crispy skin, a festive and flavorful Filipino favorite.</p>
+            <p>Crispy and juicy roasted pig.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Map Section -->
+    <!-- MAP -->
     <section id="map">
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3858.852108114923!2d120.92216611484468!3d13.74201049033807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33bd37c19f004e15%3A0x2b7659a2c984efb6!2sMabini%2C%20Batangas!5e0!3m2!1sen!2sph!4v1696000000000!5m2!1sen!2sph"
         width="100%"
         height="100%"
         style="border:0;"
-        allowfullscreen=""
         loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Mabini Map"
       ></iframe>
     </section>
 
-    <!-- Contact Section -->
+    <!-- CONTACT -->
     <section id="contact">
       <strong>Contact Us:</strong>
       <span>Number: +63 912 345 6789</span>
       <span>Email: info@mabinitourism.ph</span>
     </section>
+
   </div>
 
   <footer>
@@ -368,16 +417,31 @@
   </footer>
 
   <script>
-    document.getElementById('exploreBtn').addEventListener('click', () => {
-      document.getElementById('attractions').scrollIntoView({ behavior: 'smooth' });
-    });
-
+    /* Smooth scroll */
     function scrollToSection(id) {
-      const section = document.getElementById(id);
-      if (section) {
-        section.scrollIntoView({ behavior: 'smooth' });
-      }
+      document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+    }
+
+    document.getElementById("exploreBtn").onclick = function () {
+      scrollToSection("attractions");
+    };
+
+    /* Side Menu Functions */
+    function openMenu() {
+      document.getElementById("sideMenu").style.right = "0";
+      document.getElementById("menuBackdrop").style.display = "block";
+    }
+
+    function closeMenu() {
+      document.getElementById("sideMenu").style.right = "-250px";
+      document.getElementById("menuBackdrop").style.display = "none";
+    }
+
+    function navigate(id) {
+      closeMenu();
+      scrollToSection(id);
     }
   </script>
+
 </body>
 </html>
