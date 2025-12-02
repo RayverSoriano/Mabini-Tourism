@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mabini Tourism</title>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <style>
     /* Reset some default styles */
     * {
@@ -15,18 +16,23 @@
     }
 
     body {
-      background: url('mabini.jpg') no-repeat center center fixed;
-      color: #333;
+      background: 
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), /* Dark overlay */
+        url('mabini.jpg') no-repeat center center fixed;
+      color: white; /* Changed text color to white for better contrast */
       background-size: cover;
       line-height: 1.6;
       padding-top: 150px; /* space for fixed header */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     /* ---------- FIXED HEADER ---------- */
     header {
-      background: #6aaaff;
+      background: rgba(106, 170, 255, 0.95); /* Slightly transparent */
       color: white;
-      padding: 20px 40px;
+      padding: 15px 40px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       display: flex;
       align-items: center;
@@ -41,28 +47,22 @@
 
     /* Logo styling */
     #logo {
-      height: 60px;
+      height: 50px;
       width: auto;
-      margin-right: 20px;
+      margin-right: 15px;
       flex-shrink: 0;
     }
 
-    /* Container for text inside header */
-    .header-text {
-      flex: 1 1 auto;
+    /* Header title only */
+    .header-title {
+      flex: 1;
       text-align: center;
-      min-width: 250px;
     }
 
     header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 5px;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      font-style: italic;
-      margin-top: 0;
+      font-size: 2.2rem;
+      margin: 0;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
     }
 
     /* Navigation styles */
@@ -154,6 +154,55 @@
       width: 90%;
       max-width: 1100px;
       margin: 40px auto;
+      flex: 1;
+    }
+
+    /* HERO SECTION */
+    #hero {
+      text-align: center;
+      padding: 60px 20px;
+      margin-bottom: 50px;
+      background: rgba(0, 0, 0, 0.4); /* Darker background for hero */
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    #hero h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      color: white;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    #hero p {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      color: #f0f0f0;
+      font-style: italic;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #exploreBtn {
+      padding: 15px 40px;
+      font-size: 1.2rem;
+      color: white;
+      background-color: #00796b;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 121, 107, 0.5);
+      transition: all 0.3s ease;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    #exploreBtn:hover {
+      background-color: #004d40;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0, 121, 107, 0.7);
     }
 
     section {
@@ -161,12 +210,13 @@
     }
 
     section h2 {
-      color: #00796b;
+      color: white;
       font-size: 2rem;
       margin-bottom: 20px;
       border-bottom: 3px solid #00796b;
       display: inline-block;
       padding-bottom: 5px;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
     }
 
     /* About section */
@@ -175,32 +225,16 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.5);
       backdrop-filter: blur(10px);
-      padding: 20px 30px;
+      padding: 25px 30px;
       border-radius: 15px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       max-width: 800px;
       margin: 0 auto;
-      color: #000;
-    }
-
-    /* Button for Explore Now */
-    #exploreBtn {
-      display: block;
-      margin: 25px auto 0;
-      padding: 12px 30px;
-      font-size: 1.1rem;
       color: white;
-      background-color: #00796b;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 121, 107, 0.4);
-    }
-
-    #exploreBtn:hover {
-      background-color: #004d40;
+      font-size: 1.1rem;
+      line-height: 1.8;
     }
 
     /* Attractions grid */
@@ -211,16 +245,17 @@
     }
 
     .card {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 12px;
       overflow: hidden;
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .card:hover {
       transform: translateY(-8px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
     }
 
     .card img {
@@ -234,34 +269,273 @@
     }
 
     .card-content h3 {
-      color: #004d40;
+      color: #6aaaff;
       margin-bottom: 10px;
     }
 
     .card-content p {
-      color: white;
+      color: #f0f0f0;
     }
 
-    /* Contact section */ #contact { width: 90%; max-width: 400px; margin: 0 auto 80px; padding: 20px 30px; background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.3); box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); color: #000; text-align: center; font-size: 1.2rem; display: flex; flex-direction: column; gap: 8px; } #contact strong { font-weight: bold; font-size: 1.4rem; margin-bottom: 10px; }
+    /* ---------- REVIEWS SECTION ---------- */
+    #reviews {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto 50px;
+    }
+
+    .review-container {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .review-card {
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 15px;
+      overflow: hidden;
+      display: flex;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .review-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .review-image {
+      flex: 1;
+      min-width: 50%;
+      max-width: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .review-image img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .review-content {
+      flex: 1;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .reviewer-info h3 {
+      color: #6aaaff;
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    .reviewer-location {
+      color: #ccc;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .review-rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 15px;
+      border-radius: 20px;
+    }
+
+    .stars {
+      color: #FFD700;
+      font-size: 1.3rem;
+      letter-spacing: 3px;
+    }
+
+    .rating-number {
+      font-weight: bold;
+      color: white;
+      font-size: 1.2rem;
+    }
+
+    .review-text {
+      color: #f0f0f0;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-size: 1.1rem;
+      padding-right: 10px;
+    }
+
+    .review-date {
+      color: #ccc;
+      font-size: 0.9rem;
+      text-align: right;
+      margin-top: auto;
+    }
+
+    /* Review navigation */
+    .review-nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .review-nav button {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      color: white;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .review-nav button:hover {
+      background: rgba(255, 255, 255, 0.4);
+      transform: scale(1.1);
+    }
+
+    .review-dots {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .review-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .review-dot.active {
+      background: white;
+      transform: scale(1.2);
+    }
 
     /* Map container */
     #map {
-      width: 90%;
+      width: 100%;
       max-width: 1100px;
       height: 400px;
       margin: 0 auto 50px;
       border-radius: 15px;
-      background: rgba(255, 255, 255, 0.15);
       overflow: hidden;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
+    /* ---------- FOOTER ---------- */
     footer {
-      background: #6aaaff;
+      background: rgba(106, 170, 255, 0.95);
       color: white;
-      text-align: center;
-      padding: 15px 0;
+      padding: 40px 20px 20px;
       width: 100%;
       bottom: 0;
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      max-width: 1100px;
+      margin: 0 auto;
+      gap: 30px;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .footer-section h3 {
+      font-size: 1.4rem;
+      margin-bottom: 15px;
+      color: white;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+      padding-bottom: 8px;
+    }
+
+    .footer-section p {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .contact-icon {
+      font-size: 1.2rem;
+      width: 24px;
+      text-align: center;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      color: white;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-icon:hover {
+      background: white;
+      color: #6aaaff;
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
       font-size: 0.9rem;
     }
 
@@ -271,8 +545,13 @@
         display: none;
       }
 
-      .header-text {
-        display: none;
+      .header-title {
+        text-align: left;
+        margin-left: 10px;
+      }
+
+      header h1 {
+        font-size: 1.8rem;
       }
 
       .hamburger {
@@ -280,7 +559,38 @@
       }
 
       body {
-        padding-top: 120px;
+        padding-top: 100px;
+      }
+
+      #hero h2 {
+        font-size: 2.2rem;
+      }
+
+      #hero p {
+        font-size: 1.2rem;
+      }
+
+      .review-card {
+        flex-direction: column;
+      }
+
+      .review-image {
+        min-width: 100%;
+        max-width: 100%;
+        padding: 15px;
+      }
+
+      .review-image img {
+        height: 200px;
+      }
+
+      .review-content {
+        padding: 20px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+        gap: 20px;
       }
     }
   </style>
@@ -292,16 +602,15 @@
   <header>
     <img id="logo" src="mabini_logo_fbg-removebg-preview.png" alt="Mabini Tourism Logo" />
 
-    <div class="header-text">
-      <h1>Welcome to Mabini Tourism</h1>
-      <p>Discover the Beauty and Adventure of Mabini</p>
+    <div class="header-title">
+      <h1>Mabini Tourism</h1>
     </div>
 
     <!-- DESKTOP NAV -->
     <nav>
       <button onclick="scrollToSection('about')">Home</button>
+      <button onclick="scrollToSection('reviews')">Reviews</button>
       <button onclick="scrollToSection('map')">Map</button>
-      <button onclick="scrollToSection('contact')">Contact</button>
     </nav>
 
     <!-- HAMBURGER BUTTON -->
@@ -315,8 +624,8 @@
   <!-- SIDE MENU -->
   <div id="sideMenu">
     <button onclick="navigate('about')">Home</button>
+    <button onclick="navigate('reviews')">Reviews</button>
     <button onclick="navigate('map')">Map</button>
-    <button onclick="navigate('contact')">Contact</button>
   </div>
 
   <!-- BACKDROP -->
@@ -325,12 +634,18 @@
   <!-- MAIN CONTENT -->
   <div class="container">
 
+    <!-- HERO SECTION -->
+    <section id="hero">
+      <h2>Welcome to Mabini</h2>
+      <p>Discover the Beauty and Adventure of Mabini</p>
+      <button id="exploreBtn">Explore Now</button>
+    </section>
+
     <section id="about">
       <h2>About Mabini</h2>
       <p>
         Mabini is a beautiful coastal town located in the province of Batangas, Philippines. Known as the "Dive Capital of the Philippines," Mabini offers stunning dive sites, pristine beaches, and breathtaking views of the Taal Volcano. Whether you're an adventure seeker or someone looking for a peaceful getaway, Mabini has something for everyone.
       </p>
-      <button id="exploreBtn">Explore Now</button>
     </section>
 
     <section id="attractions">
@@ -338,7 +653,7 @@
 
       <div class="attractions">
         <div class="card">
-          <img src="anilao diving spot.jpg" alt="">
+          <img src="anilao diving spot.jpg" alt="Anilao Dive Sites">
           <div class="card-content">
             <h3>Anilao Dive Sites</h3>
             <p>Explore vibrant coral reefs and diverse marine life.</p>
@@ -346,7 +661,7 @@
         </div>
 
         <div class="card">
-          <img src="gulugod.jpg" alt="">
+          <img src="gulugod.jpg" alt="Mt. Gulugod Baboy">
           <div class="card-content">
             <h3>Mt. Gulugod Baboy</h3>
             <p>A scenic ridge with breathtaking views.</p>
@@ -354,7 +669,7 @@
         </div>
 
         <div class="card">
-          <img src="mabini beaches.jpg" alt="">
+          <img src="mabini beaches.jpg" alt="Mabini Beaches">
           <div class="card-content">
             <h3>Mabini Beaches</h3>
             <p>Relax on peaceful and beautiful shores.</p>
@@ -367,7 +682,7 @@
       <h2>Local Food Favorites</h2>
       <div class="attractions">
         <div class="card">
-          <img src="adobo.jpg" alt="">
+          <img src="adobo.jpg" alt="Adobo">
           <div class="card-content">
             <h3>Adobo</h3>
             <p>A classic Filipino marinated dish.</p>
@@ -375,7 +690,7 @@
         </div>
 
         <div class="card">
-          <img src="lomi mabini.jpg" alt="">
+          <img src="lomi mabini.jpg" alt="Lomi">
           <div class="card-content">
             <h3>Lomi</h3>
             <p>A thick flavorful noodle soup.</p>
@@ -383,12 +698,27 @@
         </div>
 
         <div class="card">
-          <img src="lechon.jpg" alt="">
+          <img src="lechon.jpg" alt="Lechon">
           <div class="card-content">
             <h3>Lechon</h3>
             <p>Crispy and juicy roasted pig.</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS SECTION -->
+    <section id="reviews">
+      <h2>Visitor Reviews</h2>
+      <div class="review-container">
+        <!-- Review cards will be inserted by JavaScript -->
+      </div>
+      <div class="review-nav">
+        <button onclick="prevReview()"><i class="fas fa-chevron-left"></i></button>
+        <div class="review-dots" id="reviewDots">
+          <!-- Dots will be inserted by JavaScript -->
+        </div>
+        <button onclick="nextReview()"><i class="fas fa-chevron-right"></i></button>
       </div>
     </section>
 
@@ -403,17 +733,59 @@
       ></iframe>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact">
-      <strong>Contact Us:</strong>
-      <span>Number: +63 912 345 6789</span>
-      <span>Email: info@mabinitourism.ph</span>
-    </section>
-
   </div>
 
+  <!-- FOOTER -->
   <footer>
-    &copy; 2025 Mabini Tourism. All rights reserved.
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Mabini Tourism</h3>
+        <p>Discover the beauty and adventure of Mabini, Batangas - the Dive Capital of the Philippines. Experience pristine beaches, vibrant dive sites, and breathtaking views.</p>
+        <div class="social-links">
+          <a href="#" class="social-icon" title="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-icon" title="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="social-icon" title="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-icon" title="YouTube">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <p><a href="#about" onclick="scrollToSection('about'); return false;" style="color:white; text-decoration:none;">Home</a></p>
+        <p><a href="#reviews" onclick="scrollToSection('reviews'); return false;" style="color:white; text-decoration:none;">Reviews</a></p>
+        <p><a href="#map" onclick="scrollToSection('map'); return false;" style="color:white; text-decoration:none;">Map</a></p>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <div class="contact-info">
+          <div class="contact-item">
+            <span class="contact-icon"><i class="fas fa-phone-alt"></i></span>
+            <span>+63 912 345 6789</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+            <span>info@mabinitourism.ph</span>
+          </div>
+          <div class="contact-item">
+            <span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
+            <span>Mabini, Batangas, Philippines</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      &copy; 2025 Mabini Tourism. All rights reserved.
+    </div>
   </footer>
 
   <script>
@@ -422,8 +794,9 @@
       document.getElementById(id).scrollIntoView({ behavior: "smooth" });
     }
 
+    // Explore button now scrolls to About section
     document.getElementById("exploreBtn").onclick = function () {
-      scrollToSection("attractions");
+      scrollToSection("about");
     };
 
     /* Side Menu Functions */
@@ -441,6 +814,173 @@
       closeMenu();
       scrollToSection(id);
     }
+
+    /* Reviews Functionality */
+    const reviews = [
+      {
+        name: "Maria Santos",
+        location: "Manila, Philippines",
+        rating: 5,
+        image: "anilao diving spot.jpg",
+        review: "Absolutely breathtaking! The Anilao dive sites are some of the best I've experienced in the Philippines. The marine life is vibrant and diverse. Our guide was incredibly knowledgeable and made sure we had a safe and memorable experience.",
+        date: "March 15, 2024"
+      },
+      {
+        name: "James Wilson",
+        location: "Sydney, Australia",
+        rating: 4.5,
+        image: "gulugod.jpg",
+        review: "Mt. Gulugod Baboy offered one of the most spectacular sunrise views I've ever seen. The hike was moderate but absolutely worth it. The local guides were friendly and the trail was well-maintained. Definitely coming back!",
+        date: "February 28, 2024"
+      },
+      {
+        name: "Sophie Chen",
+        location: "Singapore",
+        rating: 5,
+        image: "mabini beaches.jpg",
+        review: "Paradise found! The beaches in Mabini are pristine and less crowded than other tourist spots. The water is crystal clear and perfect for swimming. We stayed at a beachfront resort and the hospitality was exceptional.",
+        date: "January 10, 2024"
+      },
+      {
+        name: "Carlos Rodriguez",
+        location: "California, USA",
+        rating: 4,
+        image: "adobo.jpg",
+        review: "As a food lover, I was blown away by the local cuisine. The Adobo here has a unique twist that I haven't tasted anywhere else. The combination of diving adventures and food exploration made this trip unforgettable.",
+        date: "December 5, 2023"
+      },
+      {
+        name: "Aiko Tanaka",
+        location: "Tokyo, Japan",
+        rating: 4.5,
+        image: "lomi mabini.jpg",
+        review: "The perfect blend of adventure and relaxation. We went diving in the morning, hiking in the afternoon, and enjoyed local delicacies like Lomi in the evening. The people are warm and welcoming. Highly recommended!",
+        date: "November 20, 2023"
+      }
+    ];
+
+    let currentReview = 0;
+    const reviewContainer = document.querySelector('.review-container');
+    const dotsContainer = document.getElementById('reviewDots');
+
+    // Function to generate star ratings
+    function generateStars(rating) {
+      let stars = '';
+      const fullStars = Math.floor(rating);
+      const halfStar = rating % 1 !== 0;
+      
+      for (let i = 0; i < fullStars; i++) {
+        stars += '<i class="fas fa-star"></i>';
+      }
+      
+      if (halfStar) {
+        stars += '<i class="fas fa-star-half-alt"></i>';
+      }
+      
+      // Fill remaining empty stars
+      const emptyStars = 5 - Math.ceil(rating);
+      for (let i = 0; i < emptyStars; i++) {
+        stars += '<i class="far fa-star"></i>';
+      }
+      
+      return stars;
+    }
+
+    // Initialize reviews
+    function initReviews() {
+      // Clear any existing content
+      reviewContainer.innerHTML = '';
+      dotsContainer.innerHTML = '';
+      
+      // Create review cards
+      reviews.forEach((review, index) => {
+        const reviewCard = document.createElement('div');
+        reviewCard.className = `review-card ${index === 0 ? 'active' : 'hidden'}`;
+        reviewCard.style.display = index === 0 ? 'flex' : 'none';
+        reviewCard.innerHTML = `
+          <div class="review-image">
+            <img src="${review.image}" alt="${review.name}'s review image">
+          </div>
+          <div class="review-content">
+            <div class="review-header">
+              <div class="reviewer-info">
+                <h3>${review.name}</h3>
+                <div class="reviewer-location">
+                  <i class="fas fa-map-marker-alt"></i>
+                  <span>${review.location}</span>
+                </div>
+              </div>
+              <div class="review-rating">
+                <div class="stars">${generateStars(review.rating)}</div>
+                <div class="rating-number">${review.rating}/5</div>
+              </div>
+            </div>
+            <p class="review-text">"${review.review}"</p>
+            <div class="review-date"><i class="far fa-calendar-alt"></i> ${review.date}</div>
+          </div>
+        `;
+        reviewContainer.appendChild(reviewCard);
+        
+        // Create dot
+        const dot = document.createElement('div');
+        dot.className = `review-dot ${index === 0 ? 'active' : ''}`;
+        dot.onclick = () => goToReview(index);
+        dotsContainer.appendChild(dot);
+      });
+    }
+
+    // Go to specific review
+    function goToReview(index) {
+      // Hide current review
+      document.querySelectorAll('.review-card').forEach((card, i) => {
+        card.style.display = i === index ? 'flex' : 'none';
+      });
+      
+      // Update active dot
+      document.querySelectorAll('.review-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+      
+      currentReview = index;
+    }
+
+    // Next review
+    function nextReview() {
+      currentReview = (currentReview + 1) % reviews.length;
+      goToReview(currentReview);
+    }
+
+    // Previous review
+    function prevReview() {
+      currentReview = (currentReview - 1 + reviews.length) % reviews.length;
+      goToReview(currentReview);
+    }
+
+    // Auto-cycle reviews
+    let autoReviewInterval;
+    function startAutoReview() {
+      autoReviewInterval = setInterval(nextReview, 7000);
+    }
+
+    function resetAutoReview() {
+      clearInterval(autoReviewInterval);
+      startAutoReview();
+    }
+
+    // Initialize reviews on page load
+    window.onload = function() {
+      initReviews();
+      startAutoReview();
+      
+      // Pause auto-cycle on hover
+      reviewContainer.addEventListener('mouseenter', () => {
+        clearInterval(autoReviewInterval);
+      });
+      
+      reviewContainer.addEventListener('mouseleave', () => {
+        startAutoReview();
+      });
+    };
   </script>
 
 </body>
